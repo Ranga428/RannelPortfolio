@@ -23,25 +23,18 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
     };
 
     if (isOpen) {
-      const scrollY = window.scrollY;
       const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.addEventListener("keydown", handleEsc);
-      document.body.style.position = "fixed";
-      document.body.style.top = `-${scrollY}px`;
-      document.body.style.left = "0";
-      document.body.style.right = "0";
-      document.body.style.width = `calc(100% - ${scrollbarWidth}px)`;
+      document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     }
 
     return () => {
       document.removeEventListener("keydown", handleEsc);
-      const scrollY = document.body.style.top;
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.left = "";
-      document.body.style.right = "";
-      document.body.style.width = "";
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
+      document.body.style.overflow = "";
+      document.body.style.paddingRight = "";
     };
   }, [isOpen, onClose]);
 

@@ -10,7 +10,7 @@ import { useModal } from "./ModalContext";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const { openModal } = useModal();
+  const { isModalOpen, scrollbarWidth, openModal } = useModal();
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,12 +27,15 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const navPaddingRight = typeof window !== 'undefined' ? getComputedStyle(document.documentElement).getPropertyValue('--scrollbar-width') : '0px';
+
   return (
     <>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-[100] bg-[var(--color-bg-main)]/95 backdrop-blur-md border-b border-[var(--color-border)] ${isScrolled ? "shadow-sm" : ""}`}
+        style={{ paddingRight: scrollbarWidth > 0 ? `${scrollbarWidth}px` : undefined }}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-6 flex justify-between items-center">
           <motion.div

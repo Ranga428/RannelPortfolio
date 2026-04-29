@@ -4,19 +4,29 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 const ModalContext = createContext<{
   isModalOpen: boolean;
+  scrollbarWidth: number;
   openModal: () => void;
   closeModal: () => void;
 } | null>(null);
 
 export function ModalProvider({ children }: { children: ReactNode }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [scrollbarWidth, setScrollbarWidth] = useState(0);
 
   return (
     <ModalContext.Provider
       value={{
         isModalOpen,
-        openModal: () => setIsModalOpen(true),
-        closeModal: () => setIsModalOpen(false),
+        scrollbarWidth,
+        openModal: () => {
+          const width = window.innerWidth - document.documentElement.clientWidth;
+          setScrollbarWidth(width);
+          setIsModalOpen(true);
+        },
+        closeModal: () => {
+          setScrollbarWidth(0);
+          setIsModalOpen(false);
+        },
       }}
     >
       {children}
