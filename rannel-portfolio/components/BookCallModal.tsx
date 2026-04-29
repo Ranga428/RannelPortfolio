@@ -193,20 +193,6 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
 
           {showOptional && (
             <div className="space-y-4 pl-6 border-l-2 border-[var(--color-border)]">
-              <div>
-                <label htmlFor="coreFeatures" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
-                  Core Features
-                </label>
-                <p className="text-xs text-[var(--color-text-body)] mb-1">What are the main features you need?</p>
-                <textarea
-                  id="coreFeatures"
-                  value={coreFeatures}
-                  onChange={(e) => setCoreFeatures(e.target.value)}
-                  rows={2}
-                  className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] resize-none"
-                  placeholder="e.g., User login, upload PDF, view dashboard, Stripe checkout"
-                />
-              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="frontendTech" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
