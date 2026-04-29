@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -19,9 +20,17 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   const [showOptional, setShowOptional] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+  const handleClose = () => {
+    recaptchaRef.current?.reset();
+    setCaptchaToken(null);
+    onClose();
+  };
+
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") handleClose();
     };
 
     if (isOpen) {
@@ -29,6 +38,9 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       document.addEventListener("keydown", handleEsc);
       document.documentElement.style.overflow = "hidden";
       document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
+    } else {
+      recaptchaRef.current?.reset();
+      setCaptchaToken(null);
     }
 
     return () => {
@@ -98,10 +110,10 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ marginTop: '0px' }}>
-       <div className="fixed inset-0 bg-black/50 z-50" onClick={onClose} style={{ marginTop: '0px' }} />
+       <div className="fixed inset-0 bg-black/50 z-50" onClick={handleClose} style={{ marginTop: '0px' }} />
        <div className="relative z-51 bg-[var(--color-bg-main)] rounded-none max-w-lg w-full p-6 md:p-8 border border-[var(--color-border)]">
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="absolute top-4 right-4 text-[#4A4A4A] dark:text-[#A8A39C] hover:text-[#B84A39] text-2xl"
         >
           &times;
@@ -302,6 +314,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
           <div className="pt-2">
             <div className="mb-4">
               <ReCAPTCHA
+                ref={recaptchaRef}
                 sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                 onChange={(token: string | null) => setCaptchaToken(token)}
               />
