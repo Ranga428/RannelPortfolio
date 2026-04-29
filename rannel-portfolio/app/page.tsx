@@ -111,7 +111,9 @@ export default function Home() {
               className="bg-[var(--color-bg-card)] p-8 border border-[var(--color-border)]"
             >
               <div className="flex items-start gap-6">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#B84A39] text-white flex items-center justify-center font-serif text-xl font-semibold rounded-full" style={{ lineHeight: '48px', textAlign: 'center' }}>
+                <div className="flex-shrink-0 w-12 h-12 bg-[#B84A39] text-white flex items-center justify-center font-serif text-xl font-semibold rounded-full relative">
+                  <span className="absolute inset-0 flex items-center justify-center">{step.step}</span>
+                </div>
                   {step.step}
                 </div>
                 <div>
