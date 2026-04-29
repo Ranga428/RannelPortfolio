@@ -126,8 +126,8 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
            Tell me about your project and I&apos;ll get back to you within 24 hours.
         </p>
         {status ? (
-          <div className={`p-6 text-center ${status.type === 'success' ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'}`}>
-            <div className="text-4xl mb-4">{status.type === 'success' ? '✓' : '✗'}</div>
+          <div className={`p-6 text-center ${status.type === 'success' ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'} rounded-none`}>
+            <div className="text-4xl mb-4">{status.type === 'success' ? 'âœ“' : 'âœ—'}</div>
             <p className={`font-sans ${status.type === 'success' ? 'text-green-800 dark:text-green-200' : 'text-red-800 dark:text-red-200'}`}>
               {status.message}
             </p>
@@ -153,7 +153,45 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
               />
             </div>
             <div>
-              <label htmlFor="time-input" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
+              <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
+                Available Time <span className="text-[#B84A39]">*</span>
+              </label>
+              <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
+              <button
+                type="button"
+                onClick={() => document.getElementById('time-input')?.showPicker()}
+                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] text-left flex items-center justify-between"
+              >
+                {availableTime ? (
+                  (() => {
+                    const d = new Date(availableTime);
+                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                  })()
+                ) : (
+                  <span className="text-gray-400">Select date and time...</span>
+                )}
+                <svg className="w-5 h-5 text-[var(--color-text-body)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </button>
+              <input
+                id="time-input"
+                type="datetime-local"
+                required
+                value={availableTime}
+                onChange={(e) => setAvailableTime(e.target.value)}
+                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] sr-only"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="font-serif text-[var(--color-text-heading)] text-lg font-semibold border-b border-[var(--color-border)] pb-2">
+              Project Details
+            </h3>
+            <div>
+              <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
                 Available Time <span className="text-[#B84A39]">*</span>
               </label>
               <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
@@ -187,33 +225,13 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
               </div>
               {availableTime && (
                 <p className="text-sm text-[var(--color-text-body)] mt-1">
-                  {(() => {
+                  {(()) => {
                     const d = new Date(availableTime);
                     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                     return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
                   })()}
                 </p>
               )}
-            </div>
-          </div>
-
-          <div className="space-y-4">
-            <h3 className="font-serif text-[var(--color-text-heading)] text-lg font-semibold border-b border-[var(--color-border)] pb-2">
-              Project Details
-            </h3>
-            <div>
-              <label htmlFor="projectName" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
-                Project Name <span className="text-[#B84A39]">*</span>
-              </label>
-              <input
-                id="projectName"
-                type="text"
-                required
-                value={projectName}
-                onChange={(e) => setProjectName(e.target.value)}
-                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
-                placeholder="e.g., MediVault Portal"
-              />
             </div>
             <div>
               <label htmlFor="coreFeatures" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
@@ -236,7 +254,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
             onClick={() => setShowOptional(!showOptional)}
             className="flex items-center gap-2 text-sm font-sans text-[var(--color-text-body)] hover:text-[#B84A39] transition-colors"
           >
-            <span className={`transform transition-transform ${showOptional ? 'rotate-90' : ''}`}>▶</span>
+            <span className={`transform transition-transform ${showOptional ? 'rotate-90' : ''}`}>â–¶</span>
             Technical Details (Optional)
           </button>
 
@@ -375,3 +393,4 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
     </div>
   );
 }
+
