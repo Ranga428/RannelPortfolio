@@ -98,7 +98,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="font-serif text-3xl md:text-4xl text-center mb-12"
         >
-          How We Work
+          How I Work
         </motion.h2>
         <div className="space-y-12">
           {processSteps.map((step, i) => (
