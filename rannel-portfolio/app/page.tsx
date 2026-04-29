@@ -7,7 +7,7 @@ import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/portfolio";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
+
 import { useEffect } from "react";
 
 const services = [
@@ -44,7 +44,6 @@ const processSteps = [
 ];
 
 export default function Home() {
-  const { theme } = useTheme();
 
   useEffect(() => {
     const preventOverscroll = (e: WheelEvent) => {

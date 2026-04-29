@@ -80,7 +80,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
         setDescription("");
         setStatus(null);
       }, 5000);
-    } catch (error) {
+    } catch {
       setStatus({ type: 'error', message: 'Failed to send. Please try again or email jenelesteron01@gmail.com' });
       setTimeout(() => setStatus(null), 3000);
     }
@@ -102,7 +102,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
           Book a Discovery Call
         </h2>
         <p className="font-sans text-sm text-[var(--color-text-body)] mb-6">
-          Tell me about your project and I'll get back to you within 24 hours.
+           Tell me about your project and I&apos;ll get back to you within 24 hours.
         </p>
         {status ? (
           <div className={`p-6 text-center ${status.type === 'success' ? 'bg-green-50 dark:bg-green-900/20' : 'bg-red-50 dark:bg-red-900/20'} rounded-none`}>

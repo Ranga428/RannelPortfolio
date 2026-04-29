@@ -20,7 +20,7 @@ export async function POST(request: Request) {
       description,
     } = body;
 
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: "Rannel Portfolio <onboarding@resend.dev>",
       to: ["jenelesteron01@gmail.com"],
       subject: `[Rannel] Project Inquiry: ${projectName}`,
