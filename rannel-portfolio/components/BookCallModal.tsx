@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [email, setEmail] = useState("");
@@ -16,12 +17,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const [showOptional, setShowOptional] = useState(false);
-  const [captchaAnswer, setCaptchaAnswer] = useState("");
-  const [captcha] = useState(() => {
-    const a = Math.floor(Math.random() * 10) + 1;
-    const b = Math.floor(Math.random() * 10) + 1;
-    return { a, b, sum: a + b };
-  });
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -48,8 +44,8 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       alert("Please fill in all required fields (Email, Available Time, Project Name)");
       return;
     }
-    if (parseInt(captchaAnswer) !== captcha.sum) {
-      alert("Please solve the math problem correctly");
+    if (!captchaToken) {
+      alert("Please complete the reCAPTCHA");
       return;
     }
 
@@ -69,6 +65,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
           securityCompliance,
           deploymentTarget,
           description,
+          captchaToken,
         }),
       });
 
@@ -89,7 +86,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
         setDeploymentTarget("");
         setDescription("");
         setStatus(null);
-        setCaptchaAnswer("");
+        setCaptchaToken(null);
       }, 5000);
     } catch {
       setStatus({ type: 'error', message: 'Failed to send. Please try again or email jenelesteron01@gmail.com' });
@@ -304,16 +301,9 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
 
           <div className="pt-2">
             <div className="mb-4">
-              <label className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
-                What is {captcha.a} + {captcha.b}? <span className="text-[#B84A39]">*</span>
-              </label>
-              <input
-                type="number"
-                required
-                value={captchaAnswer}
-                onChange={(e) => setCaptchaAnswer(e.target.value)}
-                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
-                placeholder="Enter the sum"
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                onChange={(token: string | null) => setCaptchaToken(token)}
               />
             </div>
             <p className="text-xs text-[var(--color-text-body)] mb-3">

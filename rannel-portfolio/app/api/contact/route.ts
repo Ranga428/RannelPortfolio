@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY;
 
 export async function POST(request: Request) {
   try {
@@ -18,7 +19,24 @@ export async function POST(request: Request) {
       securityCompliance,
       deploymentTarget,
       description,
+      captchaToken,
     } = body;
+
+    // Verify reCAPTCHA
+    if (!captchaToken) {
+      return NextResponse.json({ error: "reCAPTCHA token missing" }, { status: 400 });
+    }
+
+    const recaptchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET}&response=${captchaToken}`,
+    });
+
+    const recaptchaData = await recaptchaRes.json();
+    if (!recaptchaData.success) {
+      return NextResponse.json({ error: "reCAPTCHA verification failed" }, { status: 400 });
+    }
 
     const { error } = await resend.emails.send({
       from: "Rannel Portfolio <onboarding@resend.dev>",
