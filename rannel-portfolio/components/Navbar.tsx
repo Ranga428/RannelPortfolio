@@ -6,12 +6,11 @@ import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import BookCallModal from "./BookCallModal";
 import { useModal } from "./ModalContext";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const { isModalOpen, openModal, closeModal } = useModal();
+  const { openModal } = useModal();
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

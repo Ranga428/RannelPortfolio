@@ -114,8 +114,6 @@ export default function Home() {
                 <div className="flex-shrink-0 w-12 h-12 bg-[#B84A39] text-white flex items-center justify-center font-serif text-xl font-semibold rounded-full relative">
                   <span className="absolute inset-0 flex items-center justify-center">{step.step}</span>
                 </div>
-                  {step.step}
-                </div>
                 <div>
                   <h3 className="font-serif text-xl font-semibold mb-3">{step.title}</h3>
                   <p className="font-sans text-[var(--color-text-body)] text-sm mb-3">{step.pitch}</p>
