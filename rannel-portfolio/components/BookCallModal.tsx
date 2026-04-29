@@ -153,7 +153,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
               />
             </div>
             <div>
-              <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
+              <label htmlFor="time-input" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
                 Available Time <span className="text-[#B84A39]">*</span>
               </label>
               <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
@@ -164,7 +164,8 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
                   required
                   value={availableTime}
                   onChange={(e) => setAvailableTime(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
+                  readOnly
+                  className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] cursor-pointer"
                 />
                 <button
                   type="button"
