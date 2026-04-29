@@ -148,6 +148,56 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <section id="about" className="max-w-6xl mx-auto px-6 md:px-8 py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row items-center gap-12"
+        >
+          <div className="flex-shrink-0">
+            <Image
+              src="/Jenel_Suit.png"
+              alt="Jenel Esteron"
+              width={300}
+              height={300}
+              className="rounded-none border border-[var(--color-border)] object-cover"
+            />
+          </div>
+          <div className="flex-1">
+            <h2 className="font-serif text-3xl md:text-4xl mb-6">About Me</h2>
+            <p className="font-sans text-[var(--color-text-body)] mb-4 leading-relaxed">
+              I'm Jenel Esteron, a Full Stack Developer and Penetration Tester who builds secure, scalable web applications. I combine modern development practices with security-first architecture to deliver MVPs that are ready for real-world deployment.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              {[
+                "React & Next.js Expert",
+                "Node.js & API Design",
+                "Manual Penetration Testing",
+                "OWASP Top 10 Specialist",
+                "AI-Accelerated Development",
+                "Secure Architecture Planning"
+              ].map((highlight) => (
+                <div key={highlight} className="flex items-center gap-2">
+                  <span className="text-[#B84A39]">✓</span>
+                  <span className="font-sans text-sm text-[var(--color-text-body)]">{highlight}</span>
+                </div>
+              ))}
+            </div>
+            <a
+              href="/Jenel_Esteron_Resume.pdf"
+              download
+              className="inline-flex items-center gap-2 px-6 py-3 bg-[#B84A39] text-white font-semibold hover:bg-[#9a3e30] transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              </svg>
+              Download Resume
+            </a>
+          </div>
+        </motion.div>
+      </section>
       <motion.footer
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
