@@ -10,7 +10,7 @@ import { useModal } from "./ModalContext";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const { isModalOpen, scrollbarWidth, openModal } = useModal();
+  const { scrollbarWidth, openModal } = useModal();
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,8 +26,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const navPaddingRight = typeof window !== 'undefined' ? getComputedStyle(document.documentElement).getPropertyValue('--scrollbar-width') : '0px';
 
   return (
     <>
