@@ -1,0 +1,52 @@
+# Dependencies
+rannel-portfolio/node_modules/
+rannel-portfolio/.pnp
+rannel-portfolio/.pnp.*
+rannel-portfolio/.yarn/*
+!rannel-portfolio/.yarn/patches
+!rannel-portfolio/.yarn/plugins
+!rannel-portfolio/.yarn/releases
+!rannel-portfolio/.yarn/versions
+
+# Build outputs
+rannel-portfolio/.next/
+rannel-portfolio/out/
+rannel-portfolio/build/
+
+# Testing
+rannel-portfolio/coverage/
+
+# Misc
+rannel-portfolio/.DS_Store
+rannel-portfolio/*.pem
+rannel-portfolio/Thumbs.db
+
+# Debug logs
+rannel-portfolio/npm-debug.log*
+rannel-portfolio/yarn-debug.log*
+rannel-portfolio/yarn-error.log*
+rannel-portfolio/.pnpm-debug.log*
+
+# Environment files
+rannel-portfolio/.env*
+
+# Vercel
+rannel-portfolio/.vercel/
+
+# TypeScript
+rannel-portfolio/*.tsbuildinfo
+rannel-portfolio/next-env.d.ts
+
+# Temp/Script files
+*.ps1
+!rannel-portfolio/**/*.ps1
+
+# Font files (generated)
+rannel-portfolio/public/*.ttf
+rannel-portfolio/public/*-r.png.bak
+
+# IDE
+rannel-portfolio/.vscode/settings.json
+rannel-portfolio/.idea/
+rannel-portfolio/*.swp
+rannel-portfolio/*.swo

@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: var(--font-serif), "Playfair Display", "Cormorant Garamond", Georgia, serif;
+  --font-sans: var(--font-sans), "DM Sans", "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-mono), "JetBrains Mono", "Space Mono", "Courier New", monospace;
+}
+
+:root {
+  --color-bg-main: #FAF7F2;
+  --color-bg-card: #EBE6DF;
+  --color-text-heading: #1A1A1A;
+  --color-text-body: #4A4A4A;
+  --color-border: #D1CCC5;
+}
+
+.dark {
+  --color-bg-main: #0F0F0E;
+  --color-bg-card: #1A1917;
+  --color-text-heading: #F5F1EB;
+  --color-text-body: #A8A39C;
+  --color-border: #2E2B27;
+}
+
+html {
+  scroll-behavior: smooth;
+  overscroll-behavior: none;
+  overflow-x: hidden;
+}
+
+body {
+  overscroll-behavior-y: contain;
+}
+
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+@media (max-width: 768px) {
+  section[id] {
+    scroll-margin-top: 50px;
+  }
+}
+
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+body {
+  background-color: var(--color-bg-main);
+  color: var(--color-text-body);
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+:root {
+  --bg-main: #FAF7F2;
+  --bg-card: #EBE6DF;
+  --text-heading: #1A1A1A;
+  --text-body: #4A4A4A;
+  --border: #D1CCC5;
+}
+
+.dark {
+  --bg-main: #0F0F0E;
+  --bg-card: #1A1917;
+  --text-heading: #F5F1EB;
+  --text-body: #A8A39C;
+  --border: #2E2B27;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+body {
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
