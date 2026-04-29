@@ -158,21 +158,39 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
               </label>
               <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
               <div className="relative">
-                <input
-                  id="time-input"
-                  type="datetime-local"
-                  required
-                  value={availableTime}
-                  onChange={(e) => setAvailableTime(e.target.value)}
-                  readOnly
-                  className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] cursor-pointer"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (availableTime) {
-                      setAvailableTime("");
-                    } else {
+                {availableTime ? (
+                  <div className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none flex items-center justify-between">
+                    <span>
+                      {(() => {
+                        const d = new Date(availableTime);
+                        const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                        return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                      })()}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => setAvailableTime("")}
+                      className="text-[var(--color-text-body)] hover:text-[#B84A39]"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                ) : (
+                  <input
+                    id="time-input"
+                    type="datetime-local"
+                    required
+                    value={availableTime}
+                    onChange={(e) => setAvailableTime(e.target.value)}
+                    className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
+                  />
+                )}
+                {!availableTime && (
+                  <button
+                    type="button"
+                    onClick={() => {
                       const input = document.getElementById('time-input') as HTMLInputElement;
                       if (input) {
                         try {
@@ -181,20 +199,14 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
                           input.focus();
                         }
                       }
-                    }
-                  }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-body)] hover:text-[#B84A39]"
-                >
-                  {availableTime ? (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  ) : (
+                    }}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-body)] hover:text-[#B84A39]"
+                  >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
-                  )}
-                </button>
+                  </button>
+                )}
               </div>
               {availableTime && (
                 <p className="text-sm text-[var(--color-text-body)] mt-1">
