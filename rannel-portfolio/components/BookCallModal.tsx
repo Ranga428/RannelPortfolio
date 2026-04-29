@@ -157,13 +157,31 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
                 Available Time <span className="text-[#B84A39]">*</span>
               </label>
               <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
+              <button
+                type="button"
+                onClick={() => document.getElementById('time-input')?.showPicker()}
+                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] text-left flex items-center justify-between"
+              >
+                {availableTime ? (
+                  (() => {
+                    const d = new Date(availableTime);
+                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                  })()
+                ) : (
+                  <span className="text-gray-400">Select date and time...</span>
+                )}
+                <svg className="w-5 h-5 text-[var(--color-text-body)]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </button>
               <input
-                id="time"
+                id="time-input"
                 type="datetime-local"
                 required
                 value={availableTime}
                 onChange={(e) => setAvailableTime(e.target.value)}
-                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
+                className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39] sr-only"
               />
             </div>
           </div>
