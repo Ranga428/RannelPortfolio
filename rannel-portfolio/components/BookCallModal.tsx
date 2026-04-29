@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import ReCAPTCHA from "react-google-recaptcha";
 
 export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   const [email, setEmail] = useState("");
