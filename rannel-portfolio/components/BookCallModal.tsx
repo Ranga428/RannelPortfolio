@@ -22,15 +22,13 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       if (e.key === "Escape") onClose();
     };
 
-    const handleScrollLock = () => {
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.overflow = "hidden";
-      document.body.style.paddingRight = `${scrollbarWidth}px`;
-    };
-
     if (isOpen) {
+      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
       document.addEventListener("keydown", handleEsc);
-      handleScrollLock();
+      document.body.style.overflow = "hidden";
+      if (scrollbarWidth > 0) {
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+      }
     }
 
     return () => {
