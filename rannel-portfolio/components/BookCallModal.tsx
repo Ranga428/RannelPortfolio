@@ -22,7 +22,9 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleClose = () => {
-    recaptchaRef.current?.reset();
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
+    }
     setCaptchaToken(null);
     onClose();
   };
@@ -37,9 +39,6 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       document.addEventListener("keydown", handleEsc);
       document.documentElement.style.overflow = "hidden";
       document.documentElement.style.paddingRight = `${scrollbarWidth}px`;
-    } else {
-      recaptchaRef.current?.reset();
-      setCaptchaToken(null);
     }
 
     return () => {
@@ -47,7 +46,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       document.documentElement.style.overflow = "";
       document.documentElement.style.paddingRight = "";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
