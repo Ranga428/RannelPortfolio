@@ -18,6 +18,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const [showOptional, setShowOptional] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleClose = () => {
@@ -58,6 +59,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       return;
     }
 
+    setIsLoading(true);
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
@@ -96,9 +98,11 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
         setDescription("");
         setStatus(null);
         setCaptchaToken(null);
+        setIsLoading(false);
       }, 5000);
     } catch {
       setStatus({ type: 'error', message: 'Failed to send. Please try again or email jenelesteron01@gmail.com' });
+      setIsLoading(false);
       setTimeout(() => setStatus(null), 3000);
     }
   };
@@ -320,10 +324,20 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
             </p>
             <button
               type="submit"
-              disabled={!captchaToken}
-              className={`w-full px-8 py-3.5 rounded-none font-semibold transition-colors ${captchaToken ? 'bg-[#B84A39] text-white hover:bg-[#9a3e30]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
+              disabled={isLoading || !captchaToken}
+              className={`w-full px-8 py-3.5 rounded-none font-semibold transition-colors flex items-center justify-center gap-2 ${isLoading ? 'bg-[#9a3e30] cursor-wait' : captchaToken ? 'bg-[#B84A39] text-white hover:bg-[#9a3e30]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
             >
-              Submit Request
+              {isLoading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  Sending...
+                </>
+              ) : (
+                "Submit Request"
+              )}
             </button>
           </div>
         </form>
