@@ -89,9 +89,9 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ marginTop: '0px' }}>
-      <div className="fixed inset-0 bg-black/50" onClick={onClose} style={{ marginTop: '0px' }} />
-      <div className="relative bg-[var(--color-bg-main)] rounded-none max-w-lg w-full p-6 md:p-8 border border-[var(--color-border)]">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center p-4" style={{ marginTop: '0px' }}>
+       <div className="fixed inset-0 bg-black/50 z-[999]" onClick={onClose} style={{ marginTop: '0px' }} />
+       <div className="relative z-[1000] bg-[var(--color-bg-main)] rounded-none max-w-lg w-full p-6 md:p-8 border border-[var(--color-border)]">
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-[#4A4A4A] dark:text-[#A8A39C] hover:text-[#B84A39] text-2xl"

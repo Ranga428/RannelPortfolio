@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Playfair_Display, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeProviderWrapper from "./ThemeProviderWrapper";
+import { ModalProvider } from "@/components/ModalContext";
+import BookCallModalWrapper from "@/components/BookCallModalWrapper";
 
 const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
 const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-sans" });
@@ -51,7 +53,10 @@ export default function RootLayout({
       </head>
       <body className={`${playfair.variable} ${dmSans.variable} ${jetbrainsMono.variable} antialiased`}>
         <ThemeProviderWrapper>
-          {children}
+          <ModalProvider>
+            <BookCallModalWrapper />
+            {children}
+          </ModalProvider>
         </ThemeProviderWrapper>
       </body>
     </html>

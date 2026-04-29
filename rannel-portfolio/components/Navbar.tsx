@@ -7,10 +7,11 @@ import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import BookCallModal from "./BookCallModal";
+import { useModal } from "./ModalContext";
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { isModalOpen, openModal, closeModal } = useModal();
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -75,7 +76,7 @@ export default function Navbar() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              onClick={() => setIsModalOpen(true)}
+              onClick={openModal}
               className="bg-[#B84A39] text-white px-5 py-2.5 rounded-none text-sm"
             >
               Book a Call
@@ -140,7 +141,7 @@ export default function Navbar() {
                 <button
                   onClick={() => {
                     setIsMobileMenuOpen(false);
-                    setIsModalOpen(true);
+                    openModal();
                   }}
                   className="w-full bg-[#B84A39] text-white px-5 py-3 rounded-none text-sm"
                 >
@@ -156,7 +157,6 @@ export default function Navbar() {
             </motion.div>
           )}
         </AnimatePresence>
-        <BookCallModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </motion.nav>
     </>
   );
