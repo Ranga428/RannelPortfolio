@@ -50,7 +50,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
       document.documentElement.style.overflow = "";
       document.documentElement.style.paddingRight = "";
     };
-  }, [isOpen]);
+  }, [isOpen, handleClose]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

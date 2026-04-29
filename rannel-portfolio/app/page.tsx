@@ -167,9 +167,9 @@ export default function Home() {
           </div>
           <div className="flex-1">
             <h2 className="font-serif text-3xl md:text-4xl mb-6">About Me</h2>
-            <p className="font-sans text-[var(--color-text-body)] mb-4 leading-relaxed">
-              I'm Jenel Esteron, a Full Stack Developer and Penetration Tester who builds secure, scalable web applications. I combine modern development practices with security-first architecture to deliver MVPs that are ready for real-world deployment.
-            </p>
+             <p className="font-sans text-[var(--color-text-body)] mb-4 leading-relaxed">
+               I&apos;m Jenel Esteron, a Full Stack Developer and Penetration Tester who builds secure, scalable web applications. I combine modern development practices with security-first architecture to deliver MVPs that are ready for real-world deployment.
+             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
               {[
                 "React & Next.js Expert",
