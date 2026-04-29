@@ -152,47 +152,68 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
                 placeholder="your@email.com"
               />
             </div>
-            <div>
-              <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
-                Available Time <span className="text-[#B84A39]">*</span>
-              </label>
-              <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
-              <div className="relative">
-                <input
-                  id="time-input"
-                  type="datetime-local"
-                  required
-                  value={availableTime}
-                  onChange={(e) => setAvailableTime(e.target.value)}
-                  className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (availableTime) {
-                      setAvailableTime("");
-                    } else {
-                      const input = document.getElementById('time-input') as HTMLInputElement;
-                      if (input) {
-                        try {
-                          input.showPicker();
-                        } catch {
-                          input.focus();
-                        }
-                      }
-                    }
-                  }}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-body)] hover:text-[#B84A39]"
-                >
-                  {availableTime ? (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  ) : (
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                  )}
+             <div>
+               <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
+                 Available Time <span className="text-[#B84A39]">*</span>
+               </label>
+               <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
+               <div className="relative">
+                 <input
+                   id="time-input"
+                   type="datetime-local"
+                   required
+                   value={availableTime}
+                   onChange={(e) => setAvailableTime(e.target.value)}
+                   className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
+                 />
+                 <button
+                   type="button"
+                   onClick={() => {
+                     if (availableTime) {
+                       setAvailableTime("");
+                     } else {
+                       const input = document.getElementById('time-input') as HTMLInputElement;
+                       if (input) {
+                         try {
+                           input.showPicker();
+                         } catch {
+                           input.focus();
+                         }
+                       }
+                     }
+                   }}
+                   className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-body)] hover:text-[#B84A39]"
+                 >
+                   {availableTime ? (
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                     </svg>
+                   ) : (
+                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                     </svg>
+                   )}
+                 </button>
+               </div>
+               {availableTime && (
+                 <p className="text-sm text-[var(--color-text-body)] mt-1">
+                   {(() => {
+                     const d = new Date(availableTime);
+                     const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                     return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                   })()}
+                 </p>
+               )}
+             </div>
+              {availableTime && (
+                <p className="text-sm text-[var(--color-text-body)] mt-1">
+                  {(() => {
+                    const d = new Date(availableTime);
+                    const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    return `${days[d.getDay()]}, ${d.toLocaleDateString()} at ${d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                  })()}
+                </p>
+              )}
                 </button>
               </div>
               {availableTime && (
