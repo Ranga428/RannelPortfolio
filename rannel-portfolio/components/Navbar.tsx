@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,11 +13,11 @@ export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
-  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,11 +40,15 @@ export default function Navbar() {
             whileTap={{ scale: 0.95 }}
           >
             <Link href="#hero" className="inline-block" style={{ marginTop: '10px' }}>
-              <img
-                src={mounted && theme === "dark" ? "/Rannel_Logo_Dark.png" : "/Rannel_Logo_Light.png"}
-                alt="Rannel"
-                style={{ height: '40px', width: 'auto' }}
-              />
+              {mounted && (
+                <Image
+                  src={theme === "dark" ? "/Rannel_Logo_Dark.png" : "/Rannel_Logo_Light.png"}
+                  alt="Rannel"
+                  width={120}
+                  height={40}
+                  style={{ height: '40px', width: 'auto' }}
+                />
+              )}
             </Link>
           </motion.div>
 

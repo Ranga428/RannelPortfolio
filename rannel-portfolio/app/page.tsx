@@ -8,7 +8,7 @@ import { projects } from "@/data/portfolio";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 const services = [
   { title: "Secure MVP Build", desc: "Launch startup-ready MVPs with security baked in." },
@@ -45,11 +45,6 @@ const processSteps = [
 
 export default function Home() {
   const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   useEffect(() => {
     const preventOverscroll = (e: WheelEvent) => {
@@ -162,16 +157,13 @@ export default function Home() {
         viewport={{ once: true }}
         className="border-t border-[var(--color-border)] py-8 text-center"
       >
-        <Link href="#hero" className="inline-block">
+         <Link href="#hero" className="inline-block">
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           >
-            {mounted && theme === "dark" ? (
-              <Image src="/Rannel_Logo_Dark.png" alt="Rannel" width={120} height={36} className="mx-auto mb-2" />
-            ) : (
-              <Image src="/Rannel_Logo.png" alt="Rannel" width={120} height={36} className="mx-auto mb-2" />
-            )}
+            <Image src="/Rannel_Logo_Light.png" alt="Rannel" width={120} height={36} className="mx-auto mb-2 dark:hidden" />
+            <Image src="/Rannel_Logo_Dark.png" alt="Rannel" width={120} height={36} className="mx-auto mb-2 hidden dark:block" />
           </motion.div>
         </Link>
         <p className="font-sans text-[var(--color-text-body)] text-sm">© Rannel by Jenel Esteron</p>
