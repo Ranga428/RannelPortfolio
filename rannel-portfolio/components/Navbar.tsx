@@ -33,7 +33,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className={`sticky top-0 z-[100] bg-[var(--color-bg-main)]/95 backdrop-blur-md border-b border-[var(--color-border)] ${isScrolled ? "shadow-sm" : ""}`}
+        className={`fixed top-0 left-0 right-0 z-[100] bg-[var(--color-bg-main)]/95 backdrop-blur-md border-b border-[var(--color-border)] ${isScrolled ? "shadow-sm" : ""}`}
       >
         <div className="max-w-6xl mx-auto px-6 md:px-8 py-6 flex justify-between items-center">
           <motion.div

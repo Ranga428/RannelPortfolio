@@ -7,7 +7,6 @@ import ProjectCard from "@/components/ProjectCard";
 import { projects } from "@/data/portfolio";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
 import { useEffect } from "react";
 
 const services = [
@@ -44,12 +43,11 @@ const processSteps = [
 ];
 
 export default function Home() {
-
   useEffect(() => {
     const preventOverscroll = (e: WheelEvent) => {
       const target = e.target as HTMLElement;
       const scrollTop = target.scrollTop || document.documentElement.scrollTop;
-      
+
       if (scrollTop <= 0 && e.deltaY < 0) {
         e.preventDefault();
       }
@@ -60,7 +58,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-[var(--color-bg-main)] text-[var(--color-text-body)]">
+    <main className="bg-[var(--color-bg-main)] text-[var(--color-text-body)] pt-[88px]">
       <Navbar />
       <div id="hero">
         <Hero />
