@@ -18,7 +18,6 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
   const [status, setStatus] = useState<{ type: 'success' | 'error', message: string } | null>(null);
   const [showOptional, setShowOptional] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
-
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const handleClose = () => {
@@ -83,7 +82,7 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
 
       setStatus({ type: 'success', message: 'Your inquiry has been sent! I\'ll get back to you within 24 hours.' });
       setTimeout(() => {
-        onClose();
+        handleClose();
         setEmail("");
         setAvailableTime("");
         setProjectName("");
@@ -153,15 +152,14 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
               <label htmlFor="time" className="block text-sm font-sans text-[var(--color-text-body)] mb-1">
                 Available Time <span className="text-[#B84A39]">*</span>
               </label>
-              <p className="text-xs text-[var(--color-text-body)] mb-1">When are you available for a 15-min discovery call?</p>
+              <p className="text-xs text-[var(--color-text-body)] mb-1">Select your preferred date and time</p>
               <input
                 id="time"
-                type="text"
+                type="datetime-local"
                 required
                 value={availableTime}
                 onChange={(e) => setAvailableTime(e.target.value)}
                 className="w-full px-4 py-2.5 border border-[var(--color-border)] bg-[var(--color-bg-main)] text-[var(--color-text-heading)] rounded-none focus:outline-none focus:border-[#B84A39]"
-                placeholder="e.g., Mondays 2-4pm, May 5th 3pm"
               />
             </div>
           </div>
