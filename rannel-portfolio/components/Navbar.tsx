@@ -59,7 +59,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-8">
             {[
               { id: "services", label: "Services" },
-              { id: "process", label: "How we work" },
+              { id: "process", label: "How I work" },
               { id: "projects", label: "Projects" }
             ].map((section) => (
               <motion.div

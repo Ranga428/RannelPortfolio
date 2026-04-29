@@ -111,9 +111,7 @@ export default function Home() {
               className="bg-[var(--color-bg-card)] p-8 border border-[var(--color-border)]"
             >
               <div className="flex items-start gap-6">
-                <div className="flex-shrink-0 w-12 h-12 bg-[#B84A39] text-white flex items-center justify-center font-serif text-xl font-semibold rounded-full">
-                  <span className="transform translate-y-[1px]">{step.step}</span>
-                </div>
+                <div className="flex-shrink-0 w-12 h-12 bg-[#B84A39] text-white flex items-center justify-center font-serif text-xl font-semibold rounded-full leading-none">
                 <div>
                   <h3 className="font-serif text-xl font-semibold mb-3">{step.title}</h3>
                   <p className="font-sans text-[var(--color-text-body)] text-sm mb-3">{step.pitch}</p>
