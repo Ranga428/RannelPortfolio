@@ -311,7 +311,8 @@ export default function BookCallModal({ isOpen, onClose }: { isOpen: boolean; on
             </p>
             <button
               type="submit"
-              className="w-full bg-[#B84A39] text-white px-8 py-3.5 rounded-none hover:bg-[#9a3e30] transition-colors font-semibold"
+              disabled={!captchaToken}
+              className={`w-full px-8 py-3.5 rounded-none font-semibold transition-colors ${captchaToken ? 'bg-[#B84A39] text-white hover:bg-[#9a3e30]' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`}
             >
               Submit Request
             </button>
